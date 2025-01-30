@@ -20,20 +20,26 @@ export const AlchemyAuthSessionProvider = ({
 	children: React.ReactNode;
 }) => {
 	const [user, setUser] = useState<User | null>(null);
-	const [authState, setAuthState] = useState<AuthenticatingState>(
-		AuthenticatingState.UNAUTHENTICATED
+	const [authState, setAuthState] = useState<AuthenticatingState | null>(
+		null
 	);
 	const [isAuthDetailsLoading, setAuthDetailsLoading] =
 		useState<boolean>(false);
 
 	useEffect(() => {
 		if (!user) {
-			signer.getAuthDetails().then((user) => {
-				setUser(user);
-				setAuthState(AuthenticatingState.AUTHENTICATED);
-			});
+			signer
+				.getAuthDetails()
+				.then((user) => {
+					setUser(user);
+					setAuthState(AuthenticatingState.AUTHENTICATED);
+				})
+				.catch(() => {
+					// User is unauthenticated
+					setAuthState(AuthenticatingState.UNAUTHENTICATED);
+				});
 		}
-	}, []);
+	}, [user]);
 
 	const verifyUserOTP = useCallback(
 		async (otpCode: string) => {

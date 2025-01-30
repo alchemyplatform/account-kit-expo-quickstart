@@ -3,8 +3,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Redirect, Tabs, useRouter } from "expo-router";
 import { Pressable } from "react-native";
 
-import { User } from "@account-kit/signer";
-import { signer } from "@/src/utils/signer";
 import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
 import { AuthenticatingState } from "@/src/context/types";
 

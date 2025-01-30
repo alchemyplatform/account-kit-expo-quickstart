@@ -11,7 +11,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { AlchemyAuthSessionProvider } from "@/src/context/AlchemyAuthSessionProvider";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 
 export {
 	// Catch any errors thrown by the Layout component.
@@ -63,7 +63,14 @@ function RootLayoutNav() {
 					<Stack.Screen
 						name="otp-modal"
 						options={{
-							presentation: "formSheet",
+							presentation:
+								Platform.OS === "ios"
+									? "formSheet"
+									: "containedTransparentModal",
+							animation:
+								Platform.OS === "android"
+									? "slide_from_bottom"
+									: "default",
 						}}
 					/>
 				</Stack>

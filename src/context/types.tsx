@@ -8,7 +8,7 @@ export enum AuthenticatingState {
 
 export interface AlchemyAuthSessionContextType {
 	user: User | null;
-	authState: AuthenticatingState;
+	authState: AuthenticatingState | null;
 	loading: boolean;
 	signInWithOTP: (email: string) => void;
 	verifyUserOTP: (otp: string) => void;

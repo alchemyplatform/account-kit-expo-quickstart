@@ -1,5 +1,6 @@
 import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
-import { useRouter } from "expo-router";
+import { AuthenticatingState } from "@/src/context/types";
+import { Redirect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {
 	View,
@@ -21,13 +22,17 @@ export default function SignIn() {
 	const [email, setEmail] = useState("");
 	const router = useRouter();
 	const { top, bottom } = useSafeAreaInsets();
-	const { signInWithOTP } = useAlchemyAuthSession();
+	const { signInWithOTP, authState } = useAlchemyAuthSession();
 
 	const onSignIn = useCallback(async () => {
 		await signInWithOTP(email);
 
 		router.navigate("/otp-modal");
 	}, [email]);
+
+	if (authState === AuthenticatingState.AUTHENTICATED) {
+		return <Redirect href={"/"} />;
+	}
 
 	return (
 		<View style={conatinerStyles({ top, bottom })}>

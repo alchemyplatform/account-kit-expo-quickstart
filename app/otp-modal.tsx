@@ -70,7 +70,6 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
 	formContainer: {
 		backgroundColor: "white",
-		borderRadius: 20,
 		flex: 1,
 		height: windowHeight,
 		paddingHorizontal: 20,
