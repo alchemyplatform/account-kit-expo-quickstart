@@ -6,13 +6,24 @@ import {
 	useCallback,
 } from "react";
 import { signer } from "../utils/signer";
+import {
+	alchemy,
+	AlchemySmartAccountClient,
+	sepolia,
+} from "@account-kit/infra";
 import { User } from "@account-kit/signer";
+import {
+	LightAccount,
+	createLightAccountAlchemyClient,
+} from "@account-kit/smart-contracts";
 import { AlchemyAuthSessionContextType, AuthenticatingState } from "./types";
-import { AppLoadingIndicator } from "@/components/app-loading";
+import { AppLoadingIndicator } from "@/src/components/app-loading";
 
 const AlchemyAuthSessionContext = createContext<AlchemyAuthSessionContextType>(
 	null!
 );
+
+const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
 export const AlchemyAuthSessionProvider = ({
 	children,
@@ -25,6 +36,9 @@ export const AlchemyAuthSessionProvider = ({
 	);
 	const [isAuthDetailsLoading, setAuthDetailsLoading] =
 		useState<boolean>(false);
+
+	const [lightAccountClient, setLightAccountClient] =
+		useState<AlchemySmartAccountClient | null>(null);
 
 	useEffect(() => {
 		if (!user) {
@@ -39,7 +53,20 @@ export const AlchemyAuthSessionProvider = ({
 					setAuthState(AuthenticatingState.UNAUTHENTICATED);
 				});
 		}
-	}, [user]);
+
+		// IF User is available, we can create a light account client
+		if (!lightAccountClient && user) {
+			createLightAccountAlchemyClient({
+				signer,
+				chain: sepolia,
+				transport: alchemy({
+					apiKey: API_KEY ?? "",
+				}),
+			}).then((client) => {
+				setLightAccountClient(client);
+			});
+		}
+	}, [user, lightAccountClient]);
 
 	const verifyUserOTP = useCallback(
 		async (otpCode: string) => {
@@ -101,6 +128,7 @@ export const AlchemyAuthSessionProvider = ({
 				signOutUser,
 				signInWithOTP,
 				verifyUserOTP,
+				lightAccountClient,
 				loading: isAuthDetailsLoading,
 			}}
 		>

@@ -1,3 +1,4 @@
+import { AlchemySmartAccountClient } from "@account-kit/infra";
 import { User } from "@account-kit/signer";
 
 export enum AuthenticatingState {
@@ -10,6 +11,7 @@ export interface AlchemyAuthSessionContextType {
 	user: User | null;
 	authState: AuthenticatingState | null;
 	loading: boolean;
+	lightAccountClient: AlchemySmartAccountClient | null;
 	signInWithOTP: (email: string) => void;
 	verifyUserOTP: (otp: string) => void;
 	signOutUser: () => void;

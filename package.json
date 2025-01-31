@@ -15,6 +15,7 @@
   "dependencies": {
     "@account-kit/react-native-signer": "^4.11.0",
     "@account-kit/signer": "^4.11.0",
+    "@account-kit/smart-contracts": "^4.11.0",
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/native": "^7.0.14",
     "abitype": "^1.0.8",

@@ -4,14 +4,14 @@ import "react-native-get-random-values";
 import "react-native-reanimated";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
+
 import { useFonts } from "expo-font";
-import { Slot, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { AlchemyAuthSessionProvider } from "@/src/context/AlchemyAuthSessionProvider";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Platform, View } from "react-native";
+import { Platform } from "react-native";
 
 export {
 	// Catch any errors thrown by the Layout component.
@@ -20,7 +20,7 @@ export {
 
 export const unstable_settings = {
 	// Ensure that reloading on `/modal` keeps a back button present.
-	initialRouteName: "(tabs)",
+	initialRouteName: "(main)",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.

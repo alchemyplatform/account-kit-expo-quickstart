@@ -34,6 +34,8 @@ export default function SignIn() {
 		return <Redirect href={"/"} />;
 	}
 
+	const signInDisabled = email.length < 1;
+
 	return (
 		<View style={conatinerStyles({ top, bottom })}>
 			<View style={styles.formContainer}>
@@ -47,13 +49,14 @@ export default function SignIn() {
 						onChangeText={(val) => setEmail(val.toLowerCase())}
 						placeholder="john@doe.com"
 					/>
-					<Pressable onPress={onSignIn}>
+					<Pressable onPress={onSignIn} disabled={signInDisabled}>
 						{({ pressed }) => (
 							<View
 								style={[
 									styles.signInButton,
 									{
-										opacity: pressed ? 0.5 : 1,
+										opacity:
+											pressed || signInDisabled ? 0.5 : 1,
 										transform: [
 											{
 												scale: pressed ? 0.98 : 1,

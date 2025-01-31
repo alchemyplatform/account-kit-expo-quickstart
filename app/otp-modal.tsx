@@ -1,26 +1,20 @@
-import { StatusBar } from "expo-status-bar";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import {
-	Modal,
 	TextInput,
-	Button,
-	SafeAreaView,
 	StyleSheet,
 	View,
 	Text,
 	Pressable,
 	Dimensions,
 } from "react-native";
-import { signer } from "@/src/utils/signer";
-import { Stack, useNavigation, useRouter } from "expo-router";
+
+import { useRouter } from "expo-router";
 import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
-// import { Text, View } from "@/components/Themed";
 
 const windowHeight = Dimensions.get("window").height;
 
 export default function ModalScreen() {
 	const [otpCode, setOtpCode] = useState<string>("");
-	const [loading, setLoading] = useState<boolean>(false);
 	const { verifyUserOTP } = useAlchemyAuthSession();
 	const router = useRouter();
 
