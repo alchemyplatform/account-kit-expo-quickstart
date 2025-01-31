@@ -15,14 +15,14 @@
 		},
 		"ios": {
 			"supportsTablet": true,
-			"bundleIdentifier": "com.iyklazer.accountkitexpoquickstart"
+			"bundleIdentifier": "com.alchemy.accountkitexpoquickstart"
 		},
 		"android": {
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/images/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
 			},
-			"package": "com.iyklazer.accountkitexpoquickstart"
+			"package": "com.alchemy.accountkitexpoquickstart"
 		},
 		"web": {
 			"bundler": "metro",
