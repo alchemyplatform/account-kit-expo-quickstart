@@ -7,11 +7,9 @@ import {
 	Text,
 	ViewStyle,
 	StyleProp,
-	TextStyle,
 	StyleSheet,
 	Dimensions,
 	TextInput,
-	Button,
 	Pressable,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
