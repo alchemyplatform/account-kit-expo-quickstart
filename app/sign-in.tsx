@@ -1,7 +1,7 @@
 import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
 import { AuthenticatingState } from "@/src/context/types";
 import { Redirect, useRouter } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
 	View,
 	Text,
@@ -23,10 +23,21 @@ export default function SignIn() {
 	const { signInWithOTP, authState } = useAlchemyAuthSession();
 
 	const onSignIn = useCallback(async () => {
-		await signInWithOTP(email);
-
-		router.navigate("/otp-modal");
+		try {
+			await signInWithOTP(email);
+		} catch (e) {
+			console.error(
+				"Unable to send OTP to user. Ensure your credentials are properly set: ",
+				e
+			);
+		}
 	}, [email]);
+
+	useEffect(() => {
+		if (authState === AuthenticatingState.AWAITING_OTP) {
+			router.navigate("/otp-modal");
+		}
+	}, [authState]);
 
 	if (authState === AuthenticatingState.AUTHENTICATED) {
 		return <Redirect href={"/"} />;

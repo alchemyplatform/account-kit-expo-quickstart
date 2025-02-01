@@ -12,10 +12,7 @@ import {
 	sepolia,
 } from "@account-kit/infra";
 import { User } from "@account-kit/signer";
-import {
-	LightAccount,
-	createLightAccountAlchemyClient,
-} from "@account-kit/smart-contracts";
+import { createLightAccountAlchemyClient } from "@account-kit/smart-contracts";
 import { AlchemyAuthSessionContextType, AuthenticatingState } from "./types";
 import { AppLoadingIndicator } from "@/src/components/app-loading";
 
@@ -48,7 +45,7 @@ export const AlchemyAuthSessionProvider = ({
 					setUser(user);
 					setAuthState(AuthenticatingState.AUTHENTICATED);
 				})
-				.catch(() => {
+				.catch((e) => {
 					// User is unauthenticated
 					setAuthState(AuthenticatingState.UNAUTHENTICATED);
 				});
@@ -92,26 +89,21 @@ export const AlchemyAuthSessionProvider = ({
 		[user]
 	);
 
-	const signInWithOTP = useCallback(async (email: string) => {
-		setAuthDetailsLoading(true);
-		try {
-			signer.authenticate({
+	const signInWithOTP = useCallback((email: string) => {
+		// Note that this would only be resolved AFTER the user has
+		// Verified thier OTP code. No need to 'await'
+		setAuthState(AuthenticatingState.AWAITING_OTP);
+
+		return signer
+			.authenticate({
 				email,
 				type: "email",
 				emailMode: "otp",
+			})
+			.catch((e) => {
+				setAuthState(AuthenticatingState.UNAUTHENTICATED);
+				throw new Error(e);
 			});
-
-			setAuthState(AuthenticatingState.AWAITING_OTP);
-		} catch (e) {
-			console.error(
-				"Unable to request user OTP. See logs for more details: ",
-				e
-			);
-
-			setAuthState(AuthenticatingState.UNAUTHENTICATED);
-		} finally {
-			setAuthDetailsLoading(false);
-		}
 	}, []);
 
 	const signOutUser = useCallback(async () => {
