@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabOneScreen() {
 	const { lightAccountClient, user } = useAlchemyAuthSession();
-	const { bottom } = useSafeAreaInsets();
+	const { bottom, top } = useSafeAreaInsets();
 
 	const account = lightAccountClient?.account;
 	if (!user) return null;

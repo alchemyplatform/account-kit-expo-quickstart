@@ -36,7 +36,7 @@ export default function AppMenu() {
 	const router = useRouter();
 
 	return (
-		<View style={styles.formContainer}>
+		<View style={styles.menuContainer}>
 			<Text style={styles.titleText}>{`Menu`}</Text>
 			{/* Menu Items */}
 			<View>
@@ -98,7 +98,7 @@ const MenuItem = ({
 };
 
 const styles = StyleSheet.create({
-	formContainer: {
+	menuContainer: {
 		backgroundColor: "white",
 		flex: 1,
 		height: windowHeight,

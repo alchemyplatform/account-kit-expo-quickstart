@@ -5,9 +5,11 @@ import { Pressable, Platform, View, StyleSheet } from "react-native";
 
 import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
 import { AuthenticatingState } from "@/src/context/types";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function MainLayout() {
 	const { authState } = useAlchemyAuthSession();
+	const { top } = useSafeAreaInsets();
 	const router = useRouter();
 
 	if (authState === AuthenticatingState.UNAUTHENTICATED) {
@@ -21,7 +23,7 @@ export default function MainLayout() {
 				options={{
 					title: "Welcome!",
 					header: () => (
-						<View style={styles.header}>
+						<View style={[styles.header, { paddingTop: top + 10 }]}>
 							<Pressable
 								style={{
 									marginLeft: "auto",
@@ -80,6 +82,7 @@ const styles = StyleSheet.create({
 		width: "100%",
 		backgroundColor: "white",
 		paddingHorizontal: 20,
+		paddingVertical: 20,
 	},
 	header: {
 		width: "100%",
