@@ -26,7 +26,7 @@ Once you have your api key, add a `.env` file in the root of your project and ad
 EXPO_PUBLIC_API_KEY="Your account kit public api key"
 ```
 
-You can now run the app using `expo start` or `expo run:ios` or `expo run:android` to run the app on your device, based on your platform of choice.
+You can now run the app using `npx expo run:ios` or `npx expo run:android` to run the app on your device, based on your platform of choice.
 
 ## What's next? 🤔
 
