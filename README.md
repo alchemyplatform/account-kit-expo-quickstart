@@ -9,7 +9,10 @@
 You can either clone this repo or quicky spin up a new project using `create-expo-app`.
 
 ```bash
+# Create a new project directory
 mkdir my-app && cd $_
+
+# Create a new expo project using this template
 npx create-expo-app@latest . --template https://github.com/alchemyplatform/account-kit-expo-quickstart
 ```
 
