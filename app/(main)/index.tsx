@@ -1,12 +1,15 @@
-import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
+import { useUser, useSmartAccountClient } from "@account-kit/react-native";
 import { StyleSheet, View, Text, Linking, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabOneScreen() {
-	const { lightAccountClient, user } = useAlchemyAuthSession();
+	const user = useUser();
 	const { bottom, top } = useSafeAreaInsets();
+	const { client } = useSmartAccountClient({
+		type: "ModularAccountV2",
+	});
 
-	const account = lightAccountClient?.account;
+	const account = client?.account;
 	if (!user) return null;
 
 	return (

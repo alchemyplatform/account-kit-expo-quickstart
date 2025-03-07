@@ -3,16 +3,16 @@ import Feather from "@expo/vector-icons/Feather";
 import { Redirect, Stack, useRouter } from "expo-router";
 import { Pressable, Platform, View, StyleSheet } from "react-native";
 
-import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
-import { AuthenticatingState } from "@/src/context/types";
+import { useSignerStatus } from "@account-kit/react-native";
+import { AlchemySignerStatus } from "@account-kit/signer";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function MainLayout() {
-	const { authState } = useAlchemyAuthSession();
+	const { status } = useSignerStatus();
 	const { top } = useSafeAreaInsets();
 	const router = useRouter();
 
-	if (authState === AuthenticatingState.UNAUTHENTICATED) {
+	if (status !== AlchemySignerStatus.CONNECTED) {
 		return <Redirect href={"/sign-in"} />;
 	}
 

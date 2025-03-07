@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, Pressable, Dimensions } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
+import { useLogout } from "@account-kit/react-native";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -32,7 +32,7 @@ const menuItems = ({ actions }: MenuItemsArgs) => {
 };
 
 export default function AppMenu() {
-	const { signOutUser } = useAlchemyAuthSession();
+	const { logout } = useLogout();
 	const router = useRouter();
 
 	return (
@@ -43,7 +43,7 @@ export default function AppMenu() {
 				{menuItems({
 					actions: {
 						signOut: async () => {
-							await signOutUser();
+							await logout();
 
 							return router.replace("/sign-in");
 						},

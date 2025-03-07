@@ -1,4 +1,4 @@
-package com.iyklazer.accountkitexpoquickstart
+package com.alchemy.accountkitexpoquickstart
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

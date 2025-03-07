@@ -8,20 +8,29 @@ import {
 	Dimensions,
 } from "react-native";
 
-import { useRouter } from "expo-router";
-import { useAlchemyAuthSession } from "@/src/context/AlchemyAuthSessionProvider";
+import { Redirect, useRouter } from "expo-router";
+import { useAuthenticate, useSignerStatus } from "@account-kit/react-native";
 
 const windowHeight = Dimensions.get("window").height;
 
 export default function ModalScreen() {
 	const [otpCode, setOtpCode] = useState<string>("");
-	const { verifyUserOTP } = useAlchemyAuthSession();
+	const { authenticateAsync } = useAuthenticate();
+	const { isConnected } = useSignerStatus();
 	const router = useRouter();
 
 	const handleUserOtp = useCallback(async () => {
-		await verifyUserOTP(otpCode);
+		await authenticateAsync({
+			otpCode,
+			type: "otp",
+		});
+
 		router.replace("/");
 	}, [otpCode]);
+
+	if (isConnected) {
+		return <Redirect href={"/"} />;
+	}
 
 	return (
 		<View style={styles.formContainer}>

@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.iyklazer.accountkitexpoquickstart'
+    namespace 'com.alchemy.accountkitexpoquickstart'
     defaultConfig {
-        applicationId 'com.iyklazer.accountkitexpoquickstart'
+        applicationId 'com.alchemy.accountkitexpoquickstart'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
