@@ -6,6 +6,7 @@ import {
 	Text,
 	Pressable,
 	Dimensions,
+	Alert,
 } from "react-native";
 
 import { Redirect, useRouter } from "expo-router";
@@ -20,12 +21,17 @@ export default function ModalScreen() {
 	const router = useRouter();
 
 	const handleUserOtp = useCallback(async () => {
-		await authenticateAsync({
-			otpCode,
-			type: "otp",
-		});
+		try {
+			authenticateAsync({
+				otpCode,
+				type: "otp",
+			});
 
-		router.replace("/");
+			router.replace("/");
+		} catch (e) {
+			Alert.alert("Error sending OTP Code :(");
+			console.log("Error seding OTP CODE: ", e);
+		}
 	}, [otpCode]);
 
 	if (isConnected) {

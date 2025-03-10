@@ -20,12 +20,12 @@ export default function SignIn() {
 	const [email, setEmail] = useState("");
 	const router = useRouter();
 	const { top, bottom } = useSafeAreaInsets();
-	const { authenticateAsync } = useAuthenticate();
+	const { authenticate } = useAuthenticate();
 	const { isConnected } = useSignerStatus();
 
 	const onSignIn = useCallback(async () => {
 		try {
-			await authenticateAsync({
+			authenticate({
 				email,
 				type: "email",
 				emailMode: "otp",

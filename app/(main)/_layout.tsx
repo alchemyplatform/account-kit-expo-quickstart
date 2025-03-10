@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Feather from "@expo/vector-icons/Feather";
 import { Redirect, Stack, useRouter } from "expo-router";
 import { Pressable, Platform, View, StyleSheet } from "react-native";
@@ -6,13 +6,18 @@ import { Pressable, Platform, View, StyleSheet } from "react-native";
 import { useSignerStatus } from "@account-kit/react-native";
 import { AlchemySignerStatus } from "@account-kit/signer";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { AppLoadingIndicator } from "@/src/components/app-loading";
 
 export default function MainLayout() {
-	const { status } = useSignerStatus();
+	const { status, isAuthenticating } = useSignerStatus();
 	const { top } = useSafeAreaInsets();
 	const router = useRouter();
 
-	if (status !== AlchemySignerStatus.CONNECTED) {
+	if (isAuthenticating) {
+		return <AppLoadingIndicator />;
+	}
+
+	if (status === AlchemySignerStatus.DISCONNECTED) {
 		return <Redirect href={"/sign-in"} />;
 	}
 
