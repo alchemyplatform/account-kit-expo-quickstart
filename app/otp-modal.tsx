@@ -8,7 +8,7 @@ import {
 	Dimensions,
 	Alert,
 } from "react-native";
-
+import { MaterialIcons } from "@expo/vector-icons";
 import { Redirect, useRouter } from "expo-router";
 import { useAuthenticate, useSignerStatus } from "@account-kit/react-native";
 
@@ -40,6 +40,20 @@ export default function ModalScreen() {
 
 	return (
 		<View style={styles.formContainer}>
+			{/* Close Button */}
+			<Pressable onPress={() => router.back()}>
+				{({ pressed }) => (
+					<View
+						style={[
+							styles.closeButtonWrapper,
+							{ opacity: pressed ? 0.5 : 1 },
+						]}
+					>
+						<MaterialIcons name="close" size={24} color={"red"} />
+					</View>
+				)}
+			</Pressable>
+
 			<Text
 				style={[styles.titleText, { fontSize: 18, marginBottom: 5 }]}
 			>{`Awesome! `}</Text>
@@ -91,6 +105,18 @@ const styles = StyleSheet.create({
 	textInputContainer: {
 		marginTop: 10,
 		width: "100%",
+	},
+
+	closeButtonWrapper: {
+		padding: 5,
+		justifyContent: "center",
+		alignItems: "center",
+		borderWidth: 1,
+		borderColor: "red",
+		borderRadius: 10,
+		width: 40,
+		height: 40,
+		marginBottom: 30,
 	},
 
 	textInput: {
