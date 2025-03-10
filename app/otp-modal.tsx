@@ -16,20 +16,21 @@ const windowHeight = Dimensions.get("window").height;
 
 export default function ModalScreen() {
 	const [otpCode, setOtpCode] = useState<string>("");
-	const { authenticateAsync } = useAuthenticate();
+	const { authenticate } = useAuthenticate();
 	const { isConnected } = useSignerStatus();
 	const router = useRouter();
 
 	const handleUserOtp = useCallback(async () => {
 		try {
-			authenticateAsync({
+			authenticate({
 				otpCode,
 				type: "otp",
 			});
 
 			router.replace("/");
 		} catch (e) {
-			Alert.alert("Error sending OTP Code :(");
+			Alert.alert("Error sending OTP Code. Check logs for more details.");
+
 			console.log("Error seding OTP CODE: ", e);
 		}
 	}, [otpCode]);
