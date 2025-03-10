@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabOneScreen() {
 	const user = useUser();
-	const { bottom, top } = useSafeAreaInsets();
+	const { bottom } = useSafeAreaInsets();
 	const { client } = useSmartAccountClient({
 		type: "ModularAccountV2",
 	});

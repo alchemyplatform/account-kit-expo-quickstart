@@ -2,18 +2,14 @@ import { StyleSheet, View, Text, Pressable, Dimensions } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useLogout } from "@account-kit/react-native";
+import {
+	MenuItemsArgs,
+	MenuItemType,
+	MenuItepProps,
+} from "@src/types/menu.types";
 
 const windowHeight = Dimensions.get("window").height;
 
-enum MenuItemType {
-	DESTRUCTIVE = "destructive",
-	DEFAULT = "default",
-}
-interface MenuItemsArgs {
-	actions: {
-		signOut: () => void;
-	};
-}
 const menuItems = ({ actions }: MenuItemsArgs) => {
 	return [
 		{
@@ -54,13 +50,6 @@ export default function AppMenu() {
 			</View>
 		</View>
 	);
-}
-
-interface MenuItepProps {
-	label: string;
-	Icon: ({ color }: { color?: string }) => React.JSX.Element;
-	action: () => void;
-	style?: MenuItemType;
 }
 
 const MenuItem = ({

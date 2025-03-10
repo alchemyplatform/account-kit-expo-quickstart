@@ -9,7 +9,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { AlchemyAuthSessionProvider } from "@/src/context/AlchemyAuthSessionProvider";
+import { AlchemyAuthSessionProvider } from "@src/context/AlchemyAuthSessionProvider";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Platform } from "react-native";
 
@@ -28,7 +28,6 @@ export default function RootLayout() {
 		...FontAwesome.font,
 	});
 
-	// Expo Router uses Error Boundaries to catch errors in the navigation tree.
 	useEffect(() => {
 		if (error) throw error;
 	}, [error]);

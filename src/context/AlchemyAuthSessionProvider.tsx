@@ -14,7 +14,7 @@ export const AlchemyAuthSessionProvider = ({
 }: {
 	children: React.ReactNode;
 }) => {
-	const configParams = {
+	const config = createConfig({
 		chain: sepolia,
 		transport: alchemy({
 			apiKey: API_KEY!,
@@ -25,9 +25,7 @@ export const AlchemyAuthSessionProvider = ({
 		sessionConfig: {
 			expirationTimeMs: 1000 * 60 * 60 * 24, // <-- Adjust the session expiration time as needed (currently 24 hours)
 		},
-	};
-
-	const config = createConfig(configParams);
+	});
 
 	return (
 		<AlchemyAccountProvider config={config} queryClient={queryClient}>
