@@ -29,8 +29,6 @@ export default function SignIn() {
 				type: "email",
 				email,
 				emailMode: "otp",
-			}).then((res) => {
-				console.log("res", res);
 			});
 
 			router.navigate("/otp-modal");
