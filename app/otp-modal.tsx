@@ -20,7 +20,7 @@ export default function ModalScreen() {
 	const { isConnected } = useSignerStatus();
 	const router = useRouter();
 
-	const handleUserOtp = useCallback(async () => {
+	const handleUserOtp = useCallback(() => {
 		try {
 			authenticate({
 				otpCode,

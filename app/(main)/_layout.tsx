@@ -78,6 +78,12 @@ export default function MainLayout() {
 							: "default",
 				}}
 			/>
+			<Stack.Screen
+				name="oauth-callback"
+				options={{
+					headerShown: false,
+				}}
+			/>
 		</Stack>
 	);
 }

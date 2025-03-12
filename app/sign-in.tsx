@@ -20,15 +20,17 @@ export default function SignIn() {
 	const [email, setEmail] = useState("");
 	const router = useRouter();
 	const { top, bottom } = useSafeAreaInsets();
-	const { authenticate } = useAuthenticate();
+	const { authenticateAsync } = useAuthenticate();
 	const { isConnected } = useSignerStatus();
 
 	const onSignIn = useCallback(async () => {
 		try {
-			authenticate({
-				email,
+			authenticateAsync({
 				type: "email",
+				email,
 				emailMode: "otp",
+			}).then((res) => {
+				console.log("res", res);
 			});
 
 			router.navigate("/otp-modal");
@@ -39,6 +41,19 @@ export default function SignIn() {
 			);
 		}
 	}, [email]);
+
+	const onSignInGoogle = useCallback(async () => {
+		try {
+			authenticateAsync({
+				type: "oauth",
+				redirectUrl: "account-kit-expo-quickstart://oauth-callback",
+				mode: "redirect",
+				authProviderId: "google",
+			});
+		} catch (e) {
+			console.error("Error signing in with Google: ", e);
+		}
+	}, []);
 
 	if (isConnected) {
 		return <Redirect href={"/"} />;
@@ -81,6 +96,24 @@ export default function SignIn() {
 					</Pressable>
 				</View>
 			</View>
+
+			<View style={{ marginTop: 20 }}>
+				<Text style={styles.orText}>Or</Text>
+				<Pressable onPress={onSignInGoogle}>
+					{({ pressed }) => (
+						<View
+							style={[
+								styles.signInButtonGoogle,
+								{ opacity: pressed ? 0.5 : 1 },
+							]}
+						>
+							<Text style={styles.signInText}>
+								Sign In with Google
+							</Text>
+						</View>
+					)}
+				</Pressable>
+			</View>
 		</View>
 	);
 }
@@ -117,6 +150,12 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		paddingVertical: 30,
 	},
+	orText: {
+		fontFamily: "SpaceMono",
+		textAlign: "center",
+		marginBottom: 10,
+		fontSize: 16,
+	},
 
 	titleText: {
 		fontFamily: "SpaceMono",
@@ -144,6 +183,15 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		backgroundColor: "rgb(0, 0, 0)",
+	},
+
+	signInButtonGoogle: {
+		width: 250,
+		padding: 15,
+		borderRadius: 10,
+		alignItems: "center",
+		justifyContent: "center",
+		backgroundColor: "rgb(16, 133, 244)",
 	},
 
 	signInText: {
