@@ -44,6 +44,7 @@ export default function SignIn() {
 		try {
 			authenticateAsync({
 				type: "oauth",
+				// NOTE: Ensure your app's scheme is properly whitelisted in your Alchemy dashboard. Refer to our docs here: https://accountkit.alchemy.com/react-native/signer/setup-guide#dashboard-setup for more details.
 				redirectUrl: "account-kit-expo-quickstart://oauth-callback",
 				mode: "redirect",
 				authProviderId: "google",
