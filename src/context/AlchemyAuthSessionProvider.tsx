@@ -5,7 +5,7 @@ import {
 	createConfig,
 } from "@account-kit/react-native";
 
-const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
+import { API_KEY } from "@env";
 
 const queryClient = new QueryClient();
 
