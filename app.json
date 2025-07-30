@@ -13,6 +13,9 @@
 			"resizeMode": "contain",
 			"backgroundColor": "#ffffff"
 		},
+		"extra": {
+			"EXPO_PUBLIC_ALCHEMY_API_KEY": "anykeyhere"
+		},
 		"ios": {
 			"supportsTablet": true,
 			"bundleIdentifier": "com.alchemy.accountkitexpoquickstart"

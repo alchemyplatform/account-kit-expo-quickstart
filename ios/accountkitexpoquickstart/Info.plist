@@ -27,8 +27,8 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>myapp</string>
-          <string>com.iyklazer.accountkitexpoquickstart</string>
+          <string>account-kit-expo-quickstart</string>
+          <string>com.alchemy.accountkitexpoquickstart</string>
         </array>
       </dict>
     </array>
