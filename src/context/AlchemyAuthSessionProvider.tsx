@@ -4,8 +4,7 @@ import {
 	AlchemyAccountProvider,
 	createConfig,
 } from "@account-kit/react-native";
-
-import { API_KEY } from "@env";
+import Constants from "expo-constants";
 
 const queryClient = new QueryClient();
 
@@ -17,10 +16,10 @@ export const AlchemyAuthSessionProvider = ({
 	const config = createConfig({
 		chain: sepolia,
 		transport: alchemy({
-			apiKey: API_KEY!,
+			apiKey: Constants.expoConfig?.extra?.EXPO_PUBLIC_ALCHEMY_API_KEY!,
 		}),
 		signerConnection: {
-			apiKey: API_KEY!,
+			apiKey: Constants.expoConfig?.extra?.EXPO_PUBLIC_ALCHEMY_API_KEY!,
 		},
 		sessionConfig: {
 			expirationTimeMs: 1000 * 60 * 60 * 24, // <-- Adjust the session expiration time as needed (currently 24 hours)

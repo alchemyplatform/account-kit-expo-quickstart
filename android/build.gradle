@@ -24,6 +24,12 @@ buildscript {
 apply plugin: "com.facebook.react.rootproject"
 
 allprojects {
+    configurations.all {
+        resolutionStrategy {
+          // Force a specific version of androidx.browser
+          force 'androidx.browser:browser:1.8.0'
+        }
+    }
     repositories {
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
